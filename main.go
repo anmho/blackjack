@@ -1,4 +1,4 @@
-package blackjack
+package main
 
 func main() {
 

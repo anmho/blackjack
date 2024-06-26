@@ -1,5 +1,5 @@
 
-
+all: deps generate blackjack
 
 
 deps:
@@ -9,6 +9,8 @@ generate:
              --go-grpc_out=./gen --go-grpc_opt=paths=source_relative \
              ./proto/blackjack/*.proto
 
+blackjack:
+	@go build -o ./bin/blackjack main.go
 
-
-server:
+dev:
+	@./bin/blackjack
