@@ -16,11 +16,14 @@ generate:
 blackjack: deps generate
 	@go build -o ./bin/blackjack main.go
 
-
+.PHONY: clean
 clean:
-	@
-.PHONY: cleanrm ./bin/*
+	@rm ./bin/*
 
 .PHONY: dev
 dev: blackjack
 	@./bin/blackjack
+
+.PHONY: test
+test:
+	@go test ./...
