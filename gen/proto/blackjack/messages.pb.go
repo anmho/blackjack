@@ -4,7 +4,7 @@
 // 	protoc        v3.20.3
 // source: proto/blackjack/messages.proto
 
-package blackjack
+package pb_blackjack
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type StartGameResponse struct {
+type CreateGameRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
@@ -28,8 +28,8 @@ type StartGameResponse struct {
 	GameId string `protobuf:"bytes,1,opt,name=gameId,proto3" json:"gameId,omitempty"`
 }
 
-func (x *StartGameResponse) Reset() {
-	*x = StartGameResponse{}
+func (x *CreateGameRequest) Reset() {
+	*x = CreateGameRequest{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_proto_blackjack_messages_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -37,13 +37,13 @@ func (x *StartGameResponse) Reset() {
 	}
 }
 
-func (x *StartGameResponse) String() string {
+func (x *CreateGameRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*StartGameResponse) ProtoMessage() {}
+func (*CreateGameRequest) ProtoMessage() {}
 
-func (x *StartGameResponse) ProtoReflect() protoreflect.Message {
+func (x *CreateGameRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_proto_blackjack_messages_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,16 +55,92 @@ func (x *StartGameResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use StartGameResponse.ProtoReflect.Descriptor instead.
-func (*StartGameResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use CreateGameRequest.ProtoReflect.Descriptor instead.
+func (*CreateGameRequest) Descriptor() ([]byte, []int) {
 	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *StartGameResponse) GetGameId() string {
+func (x *CreateGameRequest) GetGameId() string {
 	if x != nil {
 		return x.GameId
 	}
 	return ""
+}
+
+type CreateGameResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *CreateGameResponse) Reset() {
+	*x = CreateGameResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_blackjack_messages_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CreateGameResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateGameResponse) ProtoMessage() {}
+
+func (x *CreateGameResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_blackjack_messages_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateGameResponse.ProtoReflect.Descriptor instead.
+func (*CreateGameResponse) Descriptor() ([]byte, []int) {
+	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{1}
+}
+
+type ViewGamesRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *ViewGamesRequest) Reset() {
+	*x = ViewGamesRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_blackjack_messages_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ViewGamesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ViewGamesRequest) ProtoMessage() {}
+
+func (x *ViewGamesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_blackjack_messages_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ViewGamesRequest.ProtoReflect.Descriptor instead.
+func (*ViewGamesRequest) Descriptor() ([]byte, []int) {
+	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{2}
 }
 
 type ViewGamesResponse struct {
@@ -78,7 +154,7 @@ type ViewGamesResponse struct {
 func (x *ViewGamesResponse) Reset() {
 	*x = ViewGamesResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_blackjack_messages_proto_msgTypes[1]
+		mi := &file_proto_blackjack_messages_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -91,7 +167,7 @@ func (x *ViewGamesResponse) String() string {
 func (*ViewGamesResponse) ProtoMessage() {}
 
 func (x *ViewGamesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_blackjack_messages_proto_msgTypes[1]
+	mi := &file_proto_blackjack_messages_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -104,7 +180,7 @@ func (x *ViewGamesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ViewGamesResponse.ProtoReflect.Descriptor instead.
 func (*ViewGamesResponse) Descriptor() ([]byte, []int) {
-	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{1}
+	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *ViewGamesResponse) GetGames() []*Game {
@@ -114,31 +190,35 @@ func (x *ViewGamesResponse) GetGames() []*Game {
 	return nil
 }
 
-type JoinGameRequest struct {
+type BlackjackRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GameId string `protobuf:"bytes,1,opt,name=gameId,proto3" json:"gameId,omitempty"`
+	// Types that are assignable to Request:
+	//
+	//	*BlackjackRequest_JoinGame
+	//	*BlackjackRequest_Move
+	Request isBlackjackRequest_Request `protobuf_oneof:"request"`
 }
 
-func (x *JoinGameRequest) Reset() {
-	*x = JoinGameRequest{}
+func (x *BlackjackRequest) Reset() {
+	*x = BlackjackRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_blackjack_messages_proto_msgTypes[2]
+		mi := &file_proto_blackjack_messages_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *JoinGameRequest) String() string {
+func (x *BlackjackRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*JoinGameRequest) ProtoMessage() {}
+func (*BlackjackRequest) ProtoMessage() {}
 
-func (x *JoinGameRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_blackjack_messages_proto_msgTypes[2]
+func (x *BlackjackRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_blackjack_messages_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -149,12 +229,156 @@ func (x *JoinGameRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use JoinGameRequest.ProtoReflect.Descriptor instead.
-func (*JoinGameRequest) Descriptor() ([]byte, []int) {
-	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{2}
+// Deprecated: Use BlackjackRequest.ProtoReflect.Descriptor instead.
+func (*BlackjackRequest) Descriptor() ([]byte, []int) {
+	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *JoinGameRequest) GetGameId() string {
+func (m *BlackjackRequest) GetRequest() isBlackjackRequest_Request {
+	if m != nil {
+		return m.Request
+	}
+	return nil
+}
+
+func (x *BlackjackRequest) GetJoinGame() *JoinGame {
+	if x, ok := x.GetRequest().(*BlackjackRequest_JoinGame); ok {
+		return x.JoinGame
+	}
+	return nil
+}
+
+func (x *BlackjackRequest) GetMove() *BlackjackMove {
+	if x, ok := x.GetRequest().(*BlackjackRequest_Move); ok {
+		return x.Move
+	}
+	return nil
+}
+
+type isBlackjackRequest_Request interface {
+	isBlackjackRequest_Request()
+}
+
+type BlackjackRequest_JoinGame struct {
+	JoinGame *JoinGame `protobuf:"bytes,1,opt,name=joinGame,proto3,oneof"`
+}
+
+type BlackjackRequest_Move struct {
+	Move *BlackjackMove `protobuf:"bytes,2,opt,name=move,proto3,oneof"`
+}
+
+func (*BlackjackRequest_JoinGame) isBlackjackRequest_Request() {}
+
+func (*BlackjackRequest_Move) isBlackjackRequest_Request() {}
+
+type BlackjackResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Types that are assignable to Response:
+	//
+	//	*BlackjackResponse_JoinGame
+	Response isBlackjackResponse_Response `protobuf_oneof:"response"`
+}
+
+func (x *BlackjackResponse) Reset() {
+	*x = BlackjackResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_blackjack_messages_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BlackjackResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlackjackResponse) ProtoMessage() {}
+
+func (x *BlackjackResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_blackjack_messages_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlackjackResponse.ProtoReflect.Descriptor instead.
+func (*BlackjackResponse) Descriptor() ([]byte, []int) {
+	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{5}
+}
+
+func (m *BlackjackResponse) GetResponse() isBlackjackResponse_Response {
+	if m != nil {
+		return m.Response
+	}
+	return nil
+}
+
+func (x *BlackjackResponse) GetJoinGame() *JoinGameResponse {
+	if x, ok := x.GetResponse().(*BlackjackResponse_JoinGame); ok {
+		return x.JoinGame
+	}
+	return nil
+}
+
+type isBlackjackResponse_Response interface {
+	isBlackjackResponse_Response()
+}
+
+type BlackjackResponse_JoinGame struct {
+	JoinGame *JoinGameResponse `protobuf:"bytes,1,opt,name=joinGame,proto3,oneof"`
+}
+
+func (*BlackjackResponse_JoinGame) isBlackjackResponse_Response() {}
+
+type JoinGame struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	GameId string `protobuf:"bytes,1,opt,name=gameId,proto3" json:"gameId,omitempty"`
+}
+
+func (x *JoinGame) Reset() {
+	*x = JoinGame{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_blackjack_messages_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *JoinGame) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JoinGame) ProtoMessage() {}
+
+func (x *JoinGame) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_blackjack_messages_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use JoinGame.ProtoReflect.Descriptor instead.
+func (*JoinGame) Descriptor() ([]byte, []int) {
+	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *JoinGame) GetGameId() string {
 	if x != nil {
 		return x.GameId
 	}
@@ -170,7 +394,7 @@ type JoinGameResponse struct {
 func (x *JoinGameResponse) Reset() {
 	*x = JoinGameResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_proto_blackjack_messages_proto_msgTypes[3]
+		mi := &file_proto_blackjack_messages_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -183,7 +407,7 @@ func (x *JoinGameResponse) String() string {
 func (*JoinGameResponse) ProtoMessage() {}
 
 func (x *JoinGameResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_blackjack_messages_proto_msgTypes[3]
+	mi := &file_proto_blackjack_messages_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -196,7 +420,159 @@ func (x *JoinGameResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JoinGameResponse.ProtoReflect.Descriptor instead.
 func (*JoinGameResponse) Descriptor() ([]byte, []int) {
-	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{3}
+	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{7}
+}
+
+type PlayGameRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Types that are assignable to Request:
+	//
+	//	*PlayGameRequest_BlackjackMove
+	Request isPlayGameRequest_Request `protobuf_oneof:"request"`
+}
+
+func (x *PlayGameRequest) Reset() {
+	*x = PlayGameRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_blackjack_messages_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PlayGameRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PlayGameRequest) ProtoMessage() {}
+
+func (x *PlayGameRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_blackjack_messages_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PlayGameRequest.ProtoReflect.Descriptor instead.
+func (*PlayGameRequest) Descriptor() ([]byte, []int) {
+	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{8}
+}
+
+func (m *PlayGameRequest) GetRequest() isPlayGameRequest_Request {
+	if m != nil {
+		return m.Request
+	}
+	return nil
+}
+
+func (x *PlayGameRequest) GetBlackjackMove() *BlackjackMove {
+	if x, ok := x.GetRequest().(*PlayGameRequest_BlackjackMove); ok {
+		return x.BlackjackMove
+	}
+	return nil
+}
+
+type isPlayGameRequest_Request interface {
+	isPlayGameRequest_Request()
+}
+
+type PlayGameRequest_BlackjackMove struct {
+	BlackjackMove *BlackjackMove `protobuf:"bytes,1,opt,name=blackjackMove,proto3,oneof"`
+}
+
+func (*PlayGameRequest_BlackjackMove) isPlayGameRequest_Request() {}
+
+type PlayGameResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Game *Game `protobuf:"bytes,1,opt,name=game,proto3" json:"game,omitempty"`
+}
+
+func (x *PlayGameResponse) Reset() {
+	*x = PlayGameResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_blackjack_messages_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *PlayGameResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*PlayGameResponse) ProtoMessage() {}
+
+func (x *PlayGameResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_blackjack_messages_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use PlayGameResponse.ProtoReflect.Descriptor instead.
+func (*PlayGameResponse) Descriptor() ([]byte, []int) {
+	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *PlayGameResponse) GetGame() *Game {
+	if x != nil {
+		return x.Game
+	}
+	return nil
+}
+
+type BlackjackMove struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *BlackjackMove) Reset() {
+	*x = BlackjackMove{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_blackjack_messages_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BlackjackMove) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BlackjackMove) ProtoMessage() {}
+
+func (x *BlackjackMove) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_blackjack_messages_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BlackjackMove.ProtoReflect.Descriptor instead.
+func (*BlackjackMove) Descriptor() ([]byte, []int) {
+	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{10}
 }
 
 var File_proto_blackjack_messages_proto protoreflect.FileDescriptor
@@ -206,19 +582,46 @@ var file_proto_blackjack_messages_proto_rawDesc = []byte{
 	0x6b, 0x2f, 0x6d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x12, 0x09, 0x62, 0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b, 0x1a, 0x1a, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x2f, 0x62, 0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b, 0x2f, 0x67, 0x61, 0x6d,
-	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x2b, 0x0a, 0x11, 0x53, 0x74, 0x61, 0x72, 0x74,
-	0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06,
+	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x2b, 0x0a, 0x11, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x06,
 	0x67, 0x61, 0x6d, 0x65, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x67, 0x61,
-	0x6d, 0x65, 0x49, 0x64, 0x22, 0x3a, 0x0a, 0x11, 0x56, 0x69, 0x65, 0x77, 0x47, 0x61, 0x6d, 0x65,
-	0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x25, 0x0a, 0x05, 0x67, 0x61, 0x6d,
-	0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x62, 0x6c, 0x61, 0x63, 0x6b,
-	0x6a, 0x61, 0x63, 0x6b, 0x2e, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x05, 0x67, 0x61, 0x6d, 0x65, 0x73,
-	0x22, 0x29, 0x0a, 0x0f, 0x4a, 0x6f, 0x69, 0x6e, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x67, 0x61, 0x6d, 0x65, 0x49, 0x64, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x06, 0x67, 0x61, 0x6d, 0x65, 0x49, 0x64, 0x22, 0x12, 0x0a, 0x10, 0x4a,
-	0x6f, 0x69, 0x6e, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42,
-	0x0d, 0x5a, 0x0b, 0x2e, 0x2f, 0x62, 0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6d, 0x65, 0x49, 0x64, 0x22, 0x14, 0x0a, 0x12, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x47, 0x61,
+	0x6d, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x12, 0x0a, 0x10, 0x56, 0x69,
+	0x65, 0x77, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x3a,
+	0x0a, 0x11, 0x56, 0x69, 0x65, 0x77, 0x47, 0x61, 0x6d, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x12, 0x25, 0x0a, 0x05, 0x67, 0x61, 0x6d, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x62, 0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b, 0x2e, 0x47,
+	0x61, 0x6d, 0x65, 0x52, 0x05, 0x67, 0x61, 0x6d, 0x65, 0x73, 0x22, 0x80, 0x01, 0x0a, 0x10, 0x42,
+	0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
+	0x31, 0x0a, 0x08, 0x6a, 0x6f, 0x69, 0x6e, 0x47, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x13, 0x2e, 0x62, 0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b, 0x2e, 0x4a, 0x6f,
+	0x69, 0x6e, 0x47, 0x61, 0x6d, 0x65, 0x48, 0x00, 0x52, 0x08, 0x6a, 0x6f, 0x69, 0x6e, 0x47, 0x61,
+	0x6d, 0x65, 0x12, 0x2e, 0x0a, 0x04, 0x6d, 0x6f, 0x76, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x18, 0x2e, 0x62, 0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b, 0x2e, 0x42, 0x6c, 0x61,
+	0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b, 0x4d, 0x6f, 0x76, 0x65, 0x48, 0x00, 0x52, 0x04, 0x6d, 0x6f,
+	0x76, 0x65, 0x42, 0x09, 0x0a, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x5a, 0x0a,
+	0x11, 0x42, 0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x12, 0x39, 0x0a, 0x08, 0x6a, 0x6f, 0x69, 0x6e, 0x47, 0x61, 0x6d, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x62, 0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b,
+	0x2e, 0x4a, 0x6f, 0x69, 0x6e, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x48, 0x00, 0x52, 0x08, 0x6a, 0x6f, 0x69, 0x6e, 0x47, 0x61, 0x6d, 0x65, 0x42, 0x0a, 0x0a,
+	0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x22, 0x0a, 0x08, 0x4a, 0x6f, 0x69,
+	0x6e, 0x47, 0x61, 0x6d, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x67, 0x61, 0x6d, 0x65, 0x49, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x67, 0x61, 0x6d, 0x65, 0x49, 0x64, 0x22, 0x12, 0x0a,
+	0x10, 0x4a, 0x6f, 0x69, 0x6e, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x22, 0x5e, 0x0a, 0x0f, 0x50, 0x6c, 0x61, 0x79, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x40, 0x0a, 0x0d, 0x62, 0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63,
+	0x6b, 0x4d, 0x6f, 0x76, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x62, 0x6c,
+	0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b, 0x2e, 0x42, 0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63,
+	0x6b, 0x4d, 0x6f, 0x76, 0x65, 0x48, 0x00, 0x52, 0x0d, 0x62, 0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61,
+	0x63, 0x6b, 0x4d, 0x6f, 0x76, 0x65, 0x42, 0x09, 0x0a, 0x07, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x22, 0x37, 0x0a, 0x10, 0x50, 0x6c, 0x61, 0x79, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x23, 0x0a, 0x04, 0x67, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x62, 0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b, 0x2e,
+	0x47, 0x61, 0x6d, 0x65, 0x52, 0x04, 0x67, 0x61, 0x6d, 0x65, 0x22, 0x0f, 0x0a, 0x0d, 0x42, 0x6c,
+	0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b, 0x4d, 0x6f, 0x76, 0x65, 0x42, 0x10, 0x5a, 0x0e, 0x2e,
+	0x2f, 0x70, 0x62, 0x5f, 0x62, 0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -233,21 +636,33 @@ func file_proto_blackjack_messages_proto_rawDescGZIP() []byte {
 	return file_proto_blackjack_messages_proto_rawDescData
 }
 
-var file_proto_blackjack_messages_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_proto_blackjack_messages_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_proto_blackjack_messages_proto_goTypes = []interface{}{
-	(*StartGameResponse)(nil), // 0: blackjack.StartGameResponse
-	(*ViewGamesResponse)(nil), // 1: blackjack.ViewGamesResponse
-	(*JoinGameRequest)(nil),   // 2: blackjack.JoinGameRequest
-	(*JoinGameResponse)(nil),  // 3: blackjack.JoinGameResponse
-	(*Game)(nil),              // 4: blackjack.Game
+	(*CreateGameRequest)(nil),  // 0: blackjack.CreateGameRequest
+	(*CreateGameResponse)(nil), // 1: blackjack.CreateGameResponse
+	(*ViewGamesRequest)(nil),   // 2: blackjack.ViewGamesRequest
+	(*ViewGamesResponse)(nil),  // 3: blackjack.ViewGamesResponse
+	(*BlackjackRequest)(nil),   // 4: blackjack.BlackjackRequest
+	(*BlackjackResponse)(nil),  // 5: blackjack.BlackjackResponse
+	(*JoinGame)(nil),           // 6: blackjack.JoinGame
+	(*JoinGameResponse)(nil),   // 7: blackjack.JoinGameResponse
+	(*PlayGameRequest)(nil),    // 8: blackjack.PlayGameRequest
+	(*PlayGameResponse)(nil),   // 9: blackjack.PlayGameResponse
+	(*BlackjackMove)(nil),      // 10: blackjack.BlackjackMove
+	(*Game)(nil),               // 11: blackjack.Game
 }
 var file_proto_blackjack_messages_proto_depIdxs = []int32{
-	4, // 0: blackjack.ViewGamesResponse.games:type_name -> blackjack.Game
-	1, // [1:1] is the sub-list for method output_type
-	1, // [1:1] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	11, // 0: blackjack.ViewGamesResponse.games:type_name -> blackjack.Game
+	6,  // 1: blackjack.BlackjackRequest.joinGame:type_name -> blackjack.JoinGame
+	10, // 2: blackjack.BlackjackRequest.move:type_name -> blackjack.BlackjackMove
+	7,  // 3: blackjack.BlackjackResponse.joinGame:type_name -> blackjack.JoinGameResponse
+	10, // 4: blackjack.PlayGameRequest.blackjackMove:type_name -> blackjack.BlackjackMove
+	11, // 5: blackjack.PlayGameResponse.game:type_name -> blackjack.Game
+	6,  // [6:6] is the sub-list for method output_type
+	6,  // [6:6] is the sub-list for method input_type
+	6,  // [6:6] is the sub-list for extension type_name
+	6,  // [6:6] is the sub-list for extension extendee
+	0,  // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_proto_blackjack_messages_proto_init() }
@@ -258,7 +673,7 @@ func file_proto_blackjack_messages_proto_init() {
 	file_proto_blackjack_game_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_proto_blackjack_messages_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*StartGameResponse); i {
+			switch v := v.(*CreateGameRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -270,7 +685,7 @@ func file_proto_blackjack_messages_proto_init() {
 			}
 		}
 		file_proto_blackjack_messages_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ViewGamesResponse); i {
+			switch v := v.(*CreateGameResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -282,7 +697,7 @@ func file_proto_blackjack_messages_proto_init() {
 			}
 		}
 		file_proto_blackjack_messages_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*JoinGameRequest); i {
+			switch v := v.(*ViewGamesRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -294,6 +709,54 @@ func file_proto_blackjack_messages_proto_init() {
 			}
 		}
 		file_proto_blackjack_messages_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ViewGamesResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_blackjack_messages_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BlackjackRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_blackjack_messages_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BlackjackResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_blackjack_messages_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*JoinGame); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_blackjack_messages_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*JoinGameResponse); i {
 			case 0:
 				return &v.state
@@ -305,6 +768,52 @@ func file_proto_blackjack_messages_proto_init() {
 				return nil
 			}
 		}
+		file_proto_blackjack_messages_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PlayGameRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_blackjack_messages_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*PlayGameResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_blackjack_messages_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BlackjackMove); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+	}
+	file_proto_blackjack_messages_proto_msgTypes[4].OneofWrappers = []interface{}{
+		(*BlackjackRequest_JoinGame)(nil),
+		(*BlackjackRequest_Move)(nil),
+	}
+	file_proto_blackjack_messages_proto_msgTypes[5].OneofWrappers = []interface{}{
+		(*BlackjackResponse_JoinGame)(nil),
+	}
+	file_proto_blackjack_messages_proto_msgTypes[8].OneofWrappers = []interface{}{
+		(*PlayGameRequest_BlackjackMove)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -312,7 +821,7 @@ func file_proto_blackjack_messages_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_proto_blackjack_messages_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

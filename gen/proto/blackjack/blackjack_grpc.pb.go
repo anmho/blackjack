@@ -4,14 +4,13 @@
 // - protoc             v3.20.3
 // source: proto/blackjack/blackjack.proto
 
-package blackjack
+package pb_blackjack
 
 import (
 	context "context"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -23,9 +22,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type BlackJackServiceClient interface {
-	ViewGames(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ViewGamesResponse, error)
-	StartGame(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*StartGameResponse, error)
-	JoinGame(ctx context.Context, in *JoinGameRequest, opts ...grpc.CallOption) (*JoinGameResponse, error)
+	ViewGames(ctx context.Context, in *ViewGamesRequest, opts ...grpc.CallOption) (*ViewGamesResponse, error)
+	CreateGame(ctx context.Context, in *CreateGameRequest, opts ...grpc.CallOption) (*CreateGameRequest, error)
+	PlayGame(ctx context.Context, in *BlackjackRequest, opts ...grpc.CallOption) (*BlackjackResponse, error)
 }
 
 type blackJackServiceClient struct {
@@ -36,7 +35,7 @@ func NewBlackJackServiceClient(cc grpc.ClientConnInterface) BlackJackServiceClie
 	return &blackJackServiceClient{cc}
 }
 
-func (c *blackJackServiceClient) ViewGames(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ViewGamesResponse, error) {
+func (c *blackJackServiceClient) ViewGames(ctx context.Context, in *ViewGamesRequest, opts ...grpc.CallOption) (*ViewGamesResponse, error) {
 	out := new(ViewGamesResponse)
 	err := c.cc.Invoke(ctx, "/blackjack.BlackJackService/ViewGames", in, out, opts...)
 	if err != nil {
@@ -45,18 +44,18 @@ func (c *blackJackServiceClient) ViewGames(ctx context.Context, in *emptypb.Empt
 	return out, nil
 }
 
-func (c *blackJackServiceClient) StartGame(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*StartGameResponse, error) {
-	out := new(StartGameResponse)
-	err := c.cc.Invoke(ctx, "/blackjack.BlackJackService/StartGame", in, out, opts...)
+func (c *blackJackServiceClient) CreateGame(ctx context.Context, in *CreateGameRequest, opts ...grpc.CallOption) (*CreateGameRequest, error) {
+	out := new(CreateGameRequest)
+	err := c.cc.Invoke(ctx, "/blackjack.BlackJackService/CreateGame", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *blackJackServiceClient) JoinGame(ctx context.Context, in *JoinGameRequest, opts ...grpc.CallOption) (*JoinGameResponse, error) {
-	out := new(JoinGameResponse)
-	err := c.cc.Invoke(ctx, "/blackjack.BlackJackService/JoinGame", in, out, opts...)
+func (c *blackJackServiceClient) PlayGame(ctx context.Context, in *BlackjackRequest, opts ...grpc.CallOption) (*BlackjackResponse, error) {
+	out := new(BlackjackResponse)
+	err := c.cc.Invoke(ctx, "/blackjack.BlackJackService/PlayGame", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -67,9 +66,9 @@ func (c *blackJackServiceClient) JoinGame(ctx context.Context, in *JoinGameReque
 // All implementations must embed UnimplementedBlackJackServiceServer
 // for forward compatibility
 type BlackJackServiceServer interface {
-	ViewGames(context.Context, *emptypb.Empty) (*ViewGamesResponse, error)
-	StartGame(context.Context, *emptypb.Empty) (*StartGameResponse, error)
-	JoinGame(context.Context, *JoinGameRequest) (*JoinGameResponse, error)
+	ViewGames(context.Context, *ViewGamesRequest) (*ViewGamesResponse, error)
+	CreateGame(context.Context, *CreateGameRequest) (*CreateGameRequest, error)
+	PlayGame(context.Context, *BlackjackRequest) (*BlackjackResponse, error)
 	mustEmbedUnimplementedBlackJackServiceServer()
 }
 
@@ -77,14 +76,14 @@ type BlackJackServiceServer interface {
 type UnimplementedBlackJackServiceServer struct {
 }
 
-func (UnimplementedBlackJackServiceServer) ViewGames(context.Context, *emptypb.Empty) (*ViewGamesResponse, error) {
+func (UnimplementedBlackJackServiceServer) ViewGames(context.Context, *ViewGamesRequest) (*ViewGamesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ViewGames not implemented")
 }
-func (UnimplementedBlackJackServiceServer) StartGame(context.Context, *emptypb.Empty) (*StartGameResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StartGame not implemented")
+func (UnimplementedBlackJackServiceServer) CreateGame(context.Context, *CreateGameRequest) (*CreateGameRequest, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateGame not implemented")
 }
-func (UnimplementedBlackJackServiceServer) JoinGame(context.Context, *JoinGameRequest) (*JoinGameResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method JoinGame not implemented")
+func (UnimplementedBlackJackServiceServer) PlayGame(context.Context, *BlackjackRequest) (*BlackjackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PlayGame not implemented")
 }
 func (UnimplementedBlackJackServiceServer) mustEmbedUnimplementedBlackJackServiceServer() {}
 
@@ -100,7 +99,7 @@ func RegisterBlackJackServiceServer(s grpc.ServiceRegistrar, srv BlackJackServic
 }
 
 func _BlackJackService_ViewGames_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(ViewGamesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -112,43 +111,43 @@ func _BlackJackService_ViewGames_Handler(srv interface{}, ctx context.Context, d
 		FullMethod: "/blackjack.BlackJackService/ViewGames",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BlackJackServiceServer).ViewGames(ctx, req.(*emptypb.Empty))
+		return srv.(BlackJackServiceServer).ViewGames(ctx, req.(*ViewGamesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BlackJackService_StartGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+func _BlackJackService_CreateGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateGameRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BlackJackServiceServer).StartGame(ctx, in)
+		return srv.(BlackJackServiceServer).CreateGame(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blackjack.BlackJackService/StartGame",
+		FullMethod: "/blackjack.BlackJackService/CreateGame",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BlackJackServiceServer).StartGame(ctx, req.(*emptypb.Empty))
+		return srv.(BlackJackServiceServer).CreateGame(ctx, req.(*CreateGameRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _BlackJackService_JoinGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(JoinGameRequest)
+func _BlackJackService_PlayGame_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BlackjackRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BlackJackServiceServer).JoinGame(ctx, in)
+		return srv.(BlackJackServiceServer).PlayGame(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blackjack.BlackJackService/JoinGame",
+		FullMethod: "/blackjack.BlackJackService/PlayGame",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BlackJackServiceServer).JoinGame(ctx, req.(*JoinGameRequest))
+		return srv.(BlackJackServiceServer).PlayGame(ctx, req.(*BlackjackRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -165,12 +164,12 @@ var BlackJackService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _BlackJackService_ViewGames_Handler,
 		},
 		{
-			MethodName: "StartGame",
-			Handler:    _BlackJackService_StartGame_Handler,
+			MethodName: "CreateGame",
+			Handler:    _BlackJackService_CreateGame_Handler,
 		},
 		{
-			MethodName: "JoinGame",
-			Handler:    _BlackJackService_JoinGame_Handler,
+			MethodName: "PlayGame",
+			Handler:    _BlackJackService_PlayGame_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
