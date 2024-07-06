@@ -1,5 +1,5 @@
 
-all: deps generate blackjack
+all: deps generate build
 
 .PHONY: deps
 deps:
@@ -12,16 +12,17 @@ generate:
 			 --go-grpc_out=./gen --go-grpc_opt=paths=source_relative \
 			 ./proto/blackjack/*.proto
 
-.PHONY: blackjack
-blackjack: deps generate
+.PHONY: build
+build: deps generate
 	@go build -o ./bin/blackjack main.go
 
 .PHONY: clean
 clean:
-	@rm ./bin/*
+	@rm -rf ./bin/*
+	@rm -rf ./gen/*
 
 .PHONY: dev
-dev: blackjack
+dev: build
 	@./bin/blackjack
 
 .PHONY: test

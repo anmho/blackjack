@@ -5,10 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2b48a743-6c98-4a57-a30f-bce70c50d917" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/blackjack/deck.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blackjack/deck_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blackjack/errors.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/blackjack" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/blackjack" beforeDir="false" afterPath="$PROJECT_DIR$/bin/blackjack" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blackjack/cards.go" beforeDir="false" afterPath="$PROJECT_DIR$/blackjack/cards.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blackjack/server.go" beforeDir="false" afterPath="$PROJECT_DIR$/blackjack/server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/proto/blackjack/blackjack.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/proto/blackjack/blackjack_grpc.pb.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/proto/blackjack/game.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/gen/proto/blackjack/game.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gen/proto/blackjack/messages.pb.go" beforeDir="false" afterPath="$PROJECT_DIR$/gen/proto/blackjack/messages.pb.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/blackjack/blackjack.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/blackjack/blackjack_service.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/blackjack/game.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/blackjack/game.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/blackjack/messages.proto" beforeDir="false" afterPath="$PROJECT_DIR$/proto/blackjack/messages.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,6 +54,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultGoTemplateProperty": "Go File",
+    "Go Test.TestDeck_Shuffle in github.com/anmho/blackjack/blackjack.executor": "Debug",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
@@ -55,11 +69,41 @@
     "settings.editor.selected.configurable": "go.vgo"
   }
 }]]></component>
+  <component name="RunManager">
+    <configuration name="TestDeck_Shuffle in github.com/anmho/blackjack/blackjack" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="blackjack" />
+      <working_directory value="$PROJECT_DIR$/blackjack" />
+      <root_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <package value="github.com/anmho/blackjack/blackjack" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestDeck_Shuffle\E$" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Test.TestDeck_Shuffle in github.com/anmho/blackjack/blackjack" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/blackjack/deck.go</url>
+          <line>52</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
