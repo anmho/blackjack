@@ -1,42 +1,57 @@
 package blackjack
 
 import (
-	"errors"
 	pbblackjack "github.com/anmho/blackjack/gen/proto/blackjack"
 	"github.com/google/uuid"
 )
 
+type GameState int
+
+const (
+	StartedState GameState = iota
+	WaitingState
+)
+
 type Game struct {
+	Dealer  *Player
 	GameID  uuid.UUID
 	Players []*Player
+	Deck    *Deck
 }
 
 const (
 	MaxPlayers = 10
 )
 
-var (
-	ErrMaxPlayersReached = errors.New("max players reached")
-	ErrPlayerNotFound    = errors.New("player not found")
-)
+func NewGame() *Game {
+	var players []*Player
+	return &Game{
+		GameID:  uuid.New(),
+		Players: players,
+		Deck:    NewDeck(),
+		Dealer:  NewPlayer("dealer"),
+	}
+}
 
 func (g *Game) ToProto() *pbblackjack.Game {
 	var players []*pbblackjack.Player
 	for _, player := range g.Players {
-		playerProto := player.ToProto()
+		playerProto := player.ToPlayerProto()
 		players = append(players, playerProto)
 	}
+	dealer := NewPlayer("dealer")
 
 	return &pbblackjack.Game{
 		Id:      g.GameID.String(),
 		Players: players,
-		Dealer:  nil,
+		Dealer:  dealer.ToDealerProto(),
 	}
 }
 
 func (g *Game) IsFull() bool {
 	return len(g.Players) == MaxPlayers
 }
+
 func (g *Game) Join() (*Player, error) {
 	if g.IsFull() {
 		return nil, ErrMaxPlayersReached
@@ -55,7 +70,14 @@ func (g *Game) FindPlayerByID(id string) (*Player, error) {
 	return nil, ErrPlayerNotFound
 }
 
-func (g *Game) Leave(id string) error {
+// Start starts the game if it isn't already started.
+// The player starting the game must have previously joined the game.
+// If game is already started return ErrInvalidState.
+func (g *Game) Start() error {
+	return nil
+}
+
+func (g *Game) Leave(playerID string) error {
 	//for i := range len(g.Players) {
 	//	if g.Players[i].ID == player.ID {
 	//		g.Players[i] = nil
@@ -63,13 +85,4 @@ func (g *Game) Leave(id string) error {
 	//	}
 	//}
 	return ErrPlayerNotFound
-}
-func NewGame() *Game {
-	var players []*Player
-
-	gameID := uuid.New()
-	return &Game{
-		GameID:  gameID,
-		Players: players,
-	}
 }

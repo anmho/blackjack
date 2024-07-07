@@ -517,7 +517,8 @@ type JoinGameRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GameId string `protobuf:"bytes,1,opt,name=gameId,proto3" json:"gameId,omitempty"`
+	GameId   string `protobuf:"bytes,1,opt,name=gameId,proto3" json:"gameId,omitempty"`
+	Username string `protobuf:"bytes,2,opt,name=username,proto3" json:"username,omitempty"`
 }
 
 func (x *JoinGameRequest) Reset() {
@@ -555,6 +556,13 @@ func (*JoinGameRequest) Descriptor() ([]byte, []int) {
 func (x *JoinGameRequest) GetGameId() string {
 	if x != nil {
 		return x.GameId
+	}
+	return ""
+}
+
+func (x *JoinGameRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
 	}
 	return ""
 }
@@ -767,6 +775,82 @@ func (*LeaveGameResult) Descriptor() ([]byte, []int) {
 	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{11}
 }
 
+type ViewCurrentGameRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *ViewCurrentGameRequest) Reset() {
+	*x = ViewCurrentGameRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_blackjack_messages_proto_msgTypes[12]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ViewCurrentGameRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ViewCurrentGameRequest) ProtoMessage() {}
+
+func (x *ViewCurrentGameRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_blackjack_messages_proto_msgTypes[12]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ViewCurrentGameRequest.ProtoReflect.Descriptor instead.
+func (*ViewCurrentGameRequest) Descriptor() ([]byte, []int) {
+	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{12}
+}
+
+type ViewCurrentGameResult struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *ViewCurrentGameResult) Reset() {
+	*x = ViewCurrentGameResult{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_proto_blackjack_messages_proto_msgTypes[13]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ViewCurrentGameResult) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ViewCurrentGameResult) ProtoMessage() {}
+
+func (x *ViewCurrentGameResult) ProtoReflect() protoreflect.Message {
+	mi := &file_proto_blackjack_messages_proto_msgTypes[13]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ViewCurrentGameResult.ProtoReflect.Descriptor instead.
+func (*ViewCurrentGameResult) Descriptor() ([]byte, []int) {
+	return file_proto_blackjack_messages_proto_rawDescGZIP(), []int{13}
+}
+
 var File_proto_blackjack_messages_proto protoreflect.FileDescriptor
 
 var file_proto_blackjack_messages_proto_rawDesc = []byte{
@@ -848,21 +932,26 @@ var file_proto_blackjack_messages_proto_rawDesc = []byte{
 	0x2e, 0x53, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x4d, 0x6f, 0x76, 0x65, 0x48, 0x00,
 	0x52, 0x0d, 0x73, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x64, 0x65, 0x72, 0x4d, 0x6f, 0x76, 0x65, 0x42,
 	0x06, 0x0a, 0x04, 0x6d, 0x6f, 0x76, 0x65, 0x22, 0x10, 0x0a, 0x0e, 0x50, 0x6c, 0x61, 0x79, 0x47,
-	0x61, 0x6d, 0x65, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0x29, 0x0a, 0x0f, 0x4a, 0x6f, 0x69,
+	0x61, 0x6d, 0x65, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0x45, 0x0a, 0x0f, 0x4a, 0x6f, 0x69,
 	0x6e, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x06,
 	0x67, 0x61, 0x6d, 0x65, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x67, 0x61,
-	0x6d, 0x65, 0x49, 0x64, 0x22, 0x2a, 0x0a, 0x0e, 0x4a, 0x6f, 0x69, 0x6e, 0x47, 0x61, 0x6d, 0x65,
-	0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73,
-	0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73,
-	0x22, 0x12, 0x0a, 0x10, 0x53, 0x74, 0x61, 0x72, 0x74, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x22, 0x2b, 0x0a, 0x0f, 0x53, 0x74, 0x61, 0x72, 0x74, 0x47, 0x61, 0x6d,
-	0x65, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65,
-	0x73, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73,
-	0x73, 0x22, 0x12, 0x0a, 0x10, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x11, 0x0a, 0x0f, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x47, 0x61,
-	0x6d, 0x65, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42, 0x10, 0x5a, 0x0e, 0x2e, 0x2f, 0x70, 0x62,
-	0x5f, 0x62, 0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x6d, 0x65, 0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65,
+	0x22, 0x2a, 0x0a, 0x0e, 0x4a, 0x6f, 0x69, 0x6e, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x73, 0x75,
+	0x6c, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x22, 0x12, 0x0a, 0x10,
+	0x53, 0x74, 0x61, 0x72, 0x74, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x22, 0x2b, 0x0a, 0x0f, 0x53, 0x74, 0x61, 0x72, 0x74, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x73,
+	0x75, 0x6c, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x73, 0x75, 0x63, 0x63, 0x65, 0x73, 0x73, 0x22, 0x12, 0x0a,
+	0x10, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x22, 0x11, 0x0a, 0x0f, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65,
+	0x73, 0x75, 0x6c, 0x74, 0x22, 0x18, 0x0a, 0x16, 0x56, 0x69, 0x65, 0x77, 0x43, 0x75, 0x72, 0x72,
+	0x65, 0x6e, 0x74, 0x47, 0x61, 0x6d, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x17,
+	0x0a, 0x15, 0x56, 0x69, 0x65, 0x77, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x74, 0x47, 0x61, 0x6d,
+	0x65, 0x52, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42, 0x10, 0x5a, 0x0e, 0x2e, 0x2f, 0x70, 0x62, 0x5f,
+	0x62, 0x6c, 0x61, 0x63, 0x6b, 0x6a, 0x61, 0x63, 0x6b, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -877,26 +966,28 @@ func file_proto_blackjack_messages_proto_rawDescGZIP() []byte {
 	return file_proto_blackjack_messages_proto_rawDescData
 }
 
-var file_proto_blackjack_messages_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_proto_blackjack_messages_proto_msgTypes = make([]protoimpl.MessageInfo, 14)
 var file_proto_blackjack_messages_proto_goTypes = []interface{}{
-	(*BlackjackRequest)(nil),  // 0: blackjack.BlackjackRequest
-	(*BlackjackResponse)(nil), // 1: blackjack.BlackjackResponse
-	(*ViewGamesRequest)(nil),  // 2: blackjack.ViewGamesRequest
-	(*ViewGamesResult)(nil),   // 3: blackjack.ViewGamesResult
-	(*PlayGameRequest)(nil),   // 4: blackjack.PlayGameRequest
-	(*PlayGameResult)(nil),    // 5: blackjack.PlayGameResult
-	(*JoinGameRequest)(nil),   // 6: blackjack.JoinGameRequest
-	(*JoinGameResult)(nil),    // 7: blackjack.JoinGameResult
-	(*StartGameRequest)(nil),  // 8: blackjack.StartGameRequest
-	(*StartGameResult)(nil),   // 9: blackjack.StartGameResult
-	(*LeaveGameRequest)(nil),  // 10: blackjack.LeaveGameRequest
-	(*LeaveGameResult)(nil),   // 11: blackjack.LeaveGameResult
-	(*Game)(nil),              // 12: blackjack.Game
-	(*HitMove)(nil),           // 13: blackjack.HitMove
-	(*StandMove)(nil),         // 14: blackjack.StandMove
-	(*DoubleMove)(nil),        // 15: blackjack.DoubleMove
-	(*SplitMove)(nil),         // 16: blackjack.SplitMove
-	(*SurrenderMove)(nil),     // 17: blackjack.SurrenderMove
+	(*BlackjackRequest)(nil),       // 0: blackjack.BlackjackRequest
+	(*BlackjackResponse)(nil),      // 1: blackjack.BlackjackResponse
+	(*ViewGamesRequest)(nil),       // 2: blackjack.ViewGamesRequest
+	(*ViewGamesResult)(nil),        // 3: blackjack.ViewGamesResult
+	(*PlayGameRequest)(nil),        // 4: blackjack.PlayGameRequest
+	(*PlayGameResult)(nil),         // 5: blackjack.PlayGameResult
+	(*JoinGameRequest)(nil),        // 6: blackjack.JoinGameRequest
+	(*JoinGameResult)(nil),         // 7: blackjack.JoinGameResult
+	(*StartGameRequest)(nil),       // 8: blackjack.StartGameRequest
+	(*StartGameResult)(nil),        // 9: blackjack.StartGameResult
+	(*LeaveGameRequest)(nil),       // 10: blackjack.LeaveGameRequest
+	(*LeaveGameResult)(nil),        // 11: blackjack.LeaveGameResult
+	(*ViewCurrentGameRequest)(nil), // 12: blackjack.ViewCurrentGameRequest
+	(*ViewCurrentGameResult)(nil),  // 13: blackjack.ViewCurrentGameResult
+	(*Game)(nil),                   // 14: blackjack.Game
+	(*HitMove)(nil),                // 15: blackjack.HitMove
+	(*StandMove)(nil),              // 16: blackjack.StandMove
+	(*DoubleMove)(nil),             // 17: blackjack.DoubleMove
+	(*SplitMove)(nil),              // 18: blackjack.SplitMove
+	(*SurrenderMove)(nil),          // 19: blackjack.SurrenderMove
 }
 var file_proto_blackjack_messages_proto_depIdxs = []int32{
 	6,  // 0: blackjack.BlackjackRequest.joinGameRequest:type_name -> blackjack.JoinGameRequest
@@ -909,12 +1000,12 @@ var file_proto_blackjack_messages_proto_depIdxs = []int32{
 	5,  // 7: blackjack.BlackjackResponse.playGameResult:type_name -> blackjack.PlayGameResult
 	3,  // 8: blackjack.BlackjackResponse.viewGamesResult:type_name -> blackjack.ViewGamesResult
 	11, // 9: blackjack.BlackjackResponse.leaveGameResult:type_name -> blackjack.LeaveGameResult
-	12, // 10: blackjack.ViewGamesResult.games:type_name -> blackjack.Game
-	13, // 11: blackjack.PlayGameRequest.hitMove:type_name -> blackjack.HitMove
-	14, // 12: blackjack.PlayGameRequest.standMove:type_name -> blackjack.StandMove
-	15, // 13: blackjack.PlayGameRequest.doubleMove:type_name -> blackjack.DoubleMove
-	16, // 14: blackjack.PlayGameRequest.splitMove:type_name -> blackjack.SplitMove
-	17, // 15: blackjack.PlayGameRequest.surrenderMove:type_name -> blackjack.SurrenderMove
+	14, // 10: blackjack.ViewGamesResult.games:type_name -> blackjack.Game
+	15, // 11: blackjack.PlayGameRequest.hitMove:type_name -> blackjack.HitMove
+	16, // 12: blackjack.PlayGameRequest.standMove:type_name -> blackjack.StandMove
+	17, // 13: blackjack.PlayGameRequest.doubleMove:type_name -> blackjack.DoubleMove
+	18, // 14: blackjack.PlayGameRequest.splitMove:type_name -> blackjack.SplitMove
+	19, // 15: blackjack.PlayGameRequest.surrenderMove:type_name -> blackjack.SurrenderMove
 	16, // [16:16] is the sub-list for method output_type
 	16, // [16:16] is the sub-list for method input_type
 	16, // [16:16] is the sub-list for extension type_name
@@ -1073,6 +1164,30 @@ func file_proto_blackjack_messages_proto_init() {
 				return nil
 			}
 		}
+		file_proto_blackjack_messages_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ViewCurrentGameRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_proto_blackjack_messages_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ViewCurrentGameResult); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_proto_blackjack_messages_proto_msgTypes[0].OneofWrappers = []interface{}{
 		(*BlackjackRequest_JoinGameRequest)(nil),
@@ -1101,7 +1216,7 @@ func file_proto_blackjack_messages_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_proto_blackjack_messages_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   12,
+			NumMessages:   14,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

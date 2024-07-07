@@ -34,8 +34,7 @@ func NewService() pbblackjack.BlackJackServiceServer {
 }
 
 func (s *service) Connect(connectServer pbblackjack.BlackJackService_ConnectServer) error {
-	//var player *Player
-
+	var player *Player
 	for {
 		var err error
 		var request *pbblackjack.BlackjackRequest
@@ -61,13 +60,13 @@ func (s *service) Connect(connectServer pbblackjack.BlackJackService_ConnectServ
 			viewGamesResult, err = s.viewGames(request.ViewGamesRequest)
 		case *pbblackjack.BlackjackRequest_JoinGameRequest:
 			// A player can join a game if they are not already in a game
-			joinGameResult, err = s.joinGame(request.JoinGameRequest)
+			joinGameResult, err = s.joinGame(request.JoinGameRequest, &player)
 		case *pbblackjack.BlackjackRequest_StartGameRequest:
 			// A player must join a game before starting that game. The game must not be started.
-			startGameResult, err = s.startGame(request.StartGameRequest)
+			startGameResult, err = s.startGame(request.StartGameRequest, &player)
 		case *pbblackjack.BlackjackRequest_LeaveGameRequest:
 			// A player must have joined a game before leaving a game.
-			leaveGameResult, err = s.leaveGame(request.LeaveGameRequest)
+			leaveGameResult, err = s.leaveGame(request.LeaveGameRequest, &player)
 		}
 
 		if err != nil {
@@ -101,18 +100,32 @@ func (s *service) Connect(connectServer pbblackjack.BlackJackService_ConnectServ
 }
 
 func (s *service) viewGames(request *pbblackjack.ViewGamesRequest) (*pbblackjack.ViewGamesResult, error) {
-	return nil, nil
+	var result pbblackjack.ViewGamesResult
+
+	var games []*pbblackjack.Game
+	for _, game := range s.games {
+		games = append(games, game.ToProto())
+	}
+
+	result.Games = games
+	return &result, nil
 }
 
-func (s *service) joinGame(request *pbblackjack.JoinGameRequest) (*pbblackjack.JoinGameResult, error) {
-	return nil, nil
+func (s *service) joinGame(request *pbblackjack.JoinGameRequest, player **Player) (*pbblackjack.JoinGameResult, error) {
+	p := NewPlayer(request.Username)
+	*player = p
+	return &pbblackjack.JoinGameResult{
+		Success: true,
+	}, nil
 }
 
-func (s *service) startGame(request *pbblackjack.StartGameRequest) (*pbblackjack.StartGameResult, error) {
+func (s *service) startGame(request *pbblackjack.StartGameRequest, player **Player) (*pbblackjack.StartGameResult, error) {
+
 	return nil, nil
 }
 
 // leaveGame leaves the player's currently joined game. If the player is not currently joined a game we return ErrNotJoined.
-func (s *service) leaveGame(request *pbblackjack.LeaveGameRequest) (*pbblackjack.LeaveGameResult, error) {
+func (s *service) leaveGame(request *pbblackjack.LeaveGameRequest, player **Player) (*pbblackjack.LeaveGameResult, error) {
+
 	return nil, nil
 }

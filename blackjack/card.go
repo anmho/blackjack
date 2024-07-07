@@ -9,8 +9,6 @@ type Card struct {
 	Rank pb_blackjack.Rank
 }
 
-// Value returns the value of the card. Aces have two values
-
 func (c Card) IsAce() bool {
 	return c.Rank == pb_blackjack.Rank_ACE
 }
@@ -26,6 +24,7 @@ type Hand struct {
 	Cards []Card
 }
 
+// NewHand creates an empty hand
 func NewHand() *Hand {
 	cards := make([]Card, 0)
 	return &Hand{

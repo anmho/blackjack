@@ -22,11 +22,16 @@ func NewPlayer(id string) *Player {
 	}
 }
 
-func (p *Player) ToProto() *pbblackjack.Player {
+func (p *Player) ToPlayerProto() *pbblackjack.Player {
 	return &pbblackjack.Player{
 		Id:       p.ID,
 		Hand:     p.Hand.ToProto(),
 		Wager:    0,
 		Bankroll: InitialBankroll,
+	}
+}
+func (p *Player) ToDealerProto() *pbblackjack.Dealer {
+	return &pbblackjack.Dealer{
+		Hand: p.Hand.ToProto(),
 	}
 }
