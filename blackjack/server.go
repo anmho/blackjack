@@ -53,6 +53,7 @@ func (s *service) Connect(connectServer pbblackjack.BlackJackService_ConnectServ
 		var joinGameResult *pbblackjack.JoinGameResult
 		var startGameResult *pbblackjack.StartGameResult
 		var leaveGameResult *pbblackjack.LeaveGameResult
+		var viewCurrentGameResult *pbblackjack.ViewCurrentGameResult
 
 		switch request := request.Request.(type) {
 		case *pbblackjack.BlackjackRequest_ViewGamesRequest:
@@ -67,6 +68,8 @@ func (s *service) Connect(connectServer pbblackjack.BlackJackService_ConnectServ
 		case *pbblackjack.BlackjackRequest_LeaveGameRequest:
 			// A player must have joined a game before leaving a game.
 			leaveGameResult, err = s.leaveGame(request.LeaveGameRequest, &player)
+		case *pbblackjack.BlackjackRequest_ViewCurrentGameRequest:
+			viewCurrentGameResult, err = s.viewCurrentGame(request.ViewCurrentGameRequest, &player)
 		}
 
 		if err != nil {
@@ -88,6 +91,10 @@ func (s *service) Connect(connectServer pbblackjack.BlackJackService_ConnectServ
 		} else if leaveGameResult != nil {
 			response.Result = &pbblackjack.BlackjackResponse_LeaveGameResult{
 				LeaveGameResult: leaveGameResult,
+			}
+		} else if viewCurrentGameResult != nil {
+			response.Result = &pbblackjack.BlackjackResponse_ViewCurrentGameResult{
+				ViewCurrentGameResult: viewCurrentGameResult,
 			}
 		}
 
@@ -127,5 +134,9 @@ func (s *service) startGame(request *pbblackjack.StartGameRequest, player **Play
 // leaveGame leaves the player's currently joined game. If the player is not currently joined a game we return ErrNotJoined.
 func (s *service) leaveGame(request *pbblackjack.LeaveGameRequest, player **Player) (*pbblackjack.LeaveGameResult, error) {
 
+	return nil, nil
+}
+
+func (s *service) viewCurrentGame(request *pbblackjack.ViewCurrentGameRequest, player **Player) (*pbblackjack.ViewCurrentGameResult, error) {
 	return nil, nil
 }
