@@ -18,6 +18,21 @@ type service struct {
 	games map[string]*Game
 }
 
+func NewService() pbblackjack.BlackJackServiceServer {
+	const NumGames = 8
+	// initialize 8 games
+	games := make(map[string]*Game)
+	for range NumGames {
+		game := NewGame()
+		games[game.GameID.String()] = game
+	}
+
+	s := &service{
+		games: games,
+	}
+	return s
+}
+
 func (s *service) Connect(connectServer pbblackjack.BlackJackService_ConnectServer) error {
 	//var player *Player
 
@@ -100,19 +115,4 @@ func (s *service) startGame(request *pbblackjack.StartGameRequest) (*pbblackjack
 // leaveGame leaves the player's currently joined game. If the player is not currently joined a game we return ErrNotJoined.
 func (s *service) leaveGame(request *pbblackjack.LeaveGameRequest) (*pbblackjack.LeaveGameResult, error) {
 	return nil, nil
-}
-
-func NewService() pbblackjack.BlackJackServiceServer {
-	const NumGames = 8
-	// initialize 8 games
-	games := make(map[string]*Game)
-	for range NumGames {
-		game := NewGame()
-		games[game.GameID.String()] = game
-	}
-
-	s := &service{
-		games: games,
-	}
-	return s
 }
