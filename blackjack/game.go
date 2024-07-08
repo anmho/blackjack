@@ -40,6 +40,7 @@ func NewGame() Game {
 	return &game{
 		GameID: uuid.New(),
 		seats:  seats,
+		Status: pbblackjack.GameStatus_NOT_STARTED,
 		Deck:   NewDeck(),
 		Dealer: NewPlayer("dealer"),
 	}
