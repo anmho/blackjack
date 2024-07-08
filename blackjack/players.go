@@ -2,6 +2,7 @@ package blackjack
 
 import (
 	pbblackjack "github.com/anmho/blackjack/gen/proto/blackjack"
+	"github.com/google/uuid"
 )
 
 const (
@@ -10,26 +11,31 @@ const (
 )
 
 type Player struct {
-	ID   string
-	Hand *Hand
+	ID          uuid.UUID
+	DisplayName string
+	Hand        *Hand
+	Wager       int
+	Bankroll    int
 }
 
-func NewPlayer(id string) *Player {
+func NewPlayer(displayName string) *Player {
 	hand := NewHand()
 	return &Player{
-		ID:   id,
-		Hand: hand,
+		ID:          uuid.New(),
+		DisplayName: displayName,
+		Hand:        hand,
 	}
 }
 
 func (p *Player) ToPlayerProto() *pbblackjack.Player {
 	return &pbblackjack.Player{
-		Id:       p.ID,
+		Id:       p.ID.String(),
 		Hand:     p.Hand.ToProto(),
 		Wager:    0,
 		Bankroll: InitialBankroll,
 	}
 }
+
 func (p *Player) ToDealerProto() *pbblackjack.Dealer {
 	return &pbblackjack.Dealer{
 		Hand: p.Hand.ToProto(),

@@ -7,24 +7,28 @@ import (
 	"log/slog"
 )
 
+const NumGames = 8
+
 var (
-	ErrGameNotFound = errors.New("game not found")
+	ErrGameNotFound = errors.New("games not found")
 )
 
 var _ pbblackjack.BlackJackServiceServer = (*service)(nil)
 
 type service struct {
 	pbblackjack.UnimplementedBlackJackServiceServer
-	games map[string]*Game
+	games map[string]Game
+	// joinedGames tracks the games each player is currently joined as. userID -> gameID
+	joinedGames map[string]string
 }
 
 func NewService() pbblackjack.BlackJackServiceServer {
-	const NumGames = 8
+
 	// initialize 8 games
-	games := make(map[string]*Game)
+	games := make(map[string]Game)
 	for range NumGames {
 		game := NewGame()
-		games[game.GameID.String()] = game
+		games[game.ID().String()] = game
 	}
 
 	s := &service{
@@ -33,16 +37,16 @@ func NewService() pbblackjack.BlackJackServiceServer {
 	return s
 }
 
-func (s *service) Connect(connectServer pbblackjack.BlackJackService_ConnectServer) error {
+func (s *service) Connect(stream pbblackjack.BlackJackService_ConnectServer) error {
 	var player *Player
 	for {
 		var err error
 		var request *pbblackjack.BlackjackRequest
 		var response pbblackjack.BlackjackResponse
-		request, err = connectServer.Recv()
+		request, err = stream.Recv()
 		if err != nil {
 			if err == io.EOF {
-				// we should remove them from the game
+				// we should remove them from the games
 				break
 			}
 			slog.Error(err.Error())
@@ -60,13 +64,13 @@ func (s *service) Connect(connectServer pbblackjack.BlackJackService_ConnectServ
 			// A connected player can always view the status of currently played games
 			viewGamesResult, err = s.viewGames(request.ViewGamesRequest)
 		case *pbblackjack.BlackjackRequest_JoinGameRequest:
-			// A player can join a game if they are not already in a game
+			// A player can join a games if they are not already in a games
 			joinGameResult, err = s.joinGame(request.JoinGameRequest, &player)
 		case *pbblackjack.BlackjackRequest_StartGameRequest:
-			// A player must join a game before starting that game. The game must not be started.
+			// A player must join a games before starting that games. The games must not be started.
 			startGameResult, err = s.startGame(request.StartGameRequest, &player)
 		case *pbblackjack.BlackjackRequest_LeaveGameRequest:
-			// A player must have joined a game before leaving a game.
+			// A player must have joined a games before leaving a games.
 			leaveGameResult, err = s.leaveGame(request.LeaveGameRequest, &player)
 		case *pbblackjack.BlackjackRequest_ViewCurrentGameRequest:
 			viewCurrentGameResult, err = s.viewCurrentGame(request.ViewCurrentGameRequest, &player)
@@ -76,29 +80,16 @@ func (s *service) Connect(connectServer pbblackjack.BlackJackService_ConnectServ
 			return err
 		}
 
-		if viewGamesResult != nil {
-			response.Result = &pbblackjack.BlackjackResponse_ViewGamesResult{
-				ViewGamesResult: viewGamesResult,
-			}
-		} else if joinGameResult != nil {
-			response.Result = &pbblackjack.BlackjackResponse_JoinGameResult{
-				JoinGameResult: joinGameResult,
-			}
-		} else if startGameResult != nil {
-			response.Result = &pbblackjack.BlackjackResponse_StartGameResult{
-				StartGameResult: startGameResult,
-			}
-		} else if leaveGameResult != nil {
-			response.Result = &pbblackjack.BlackjackResponse_LeaveGameResult{
-				LeaveGameResult: leaveGameResult,
-			}
-		} else if viewCurrentGameResult != nil {
-			response.Result = &pbblackjack.BlackjackResponse_ViewCurrentGameResult{
-				ViewCurrentGameResult: viewCurrentGameResult,
-			}
-		}
+		setResponseResult(
+			&response,
+			viewGamesResult,
+			joinGameResult,
+			startGameResult,
+			leaveGameResult,
+			viewCurrentGameResult,
+		)
 
-		err = connectServer.Send(&response)
+		err = stream.Send(&response)
 		if err != nil {
 			return err
 		}
@@ -107,15 +98,18 @@ func (s *service) Connect(connectServer pbblackjack.BlackJackService_ConnectServ
 }
 
 func (s *service) viewGames(request *pbblackjack.ViewGamesRequest) (*pbblackjack.ViewGamesResult, error) {
-	var result pbblackjack.ViewGamesResult
 
 	var games []*pbblackjack.Game
 	for _, game := range s.games {
+
 		games = append(games, game.ToProto())
 	}
 
-	result.Games = games
-	return &result, nil
+	result := &pbblackjack.ViewGamesResult{
+		Games: games,
+	}
+
+	return result, nil
 }
 
 func (s *service) joinGame(request *pbblackjack.JoinGameRequest, player **Player) (*pbblackjack.JoinGameResult, error) {
@@ -131,12 +125,56 @@ func (s *service) startGame(request *pbblackjack.StartGameRequest, player **Play
 	return nil, nil
 }
 
-// leaveGame leaves the player's currently joined game. If the player is not currently joined a game we return ErrNotJoined.
+// leaveGame leaves the player's currently joined games. If the player is not currently joined a games we return ErrNotJoined.
 func (s *service) leaveGame(request *pbblackjack.LeaveGameRequest, player **Player) (*pbblackjack.LeaveGameResult, error) {
-
 	return nil, nil
 }
 
 func (s *service) viewCurrentGame(request *pbblackjack.ViewCurrentGameRequest, player **Player) (*pbblackjack.ViewCurrentGameResult, error) {
-	return nil, nil
+	if player == nil || *player == nil {
+		return nil, ErrNotJoined
+	}
+
+	pbPlayer := (*player).ToPlayerProto()
+
+	result := pbblackjack.ViewCurrentGameResult{
+		Player: pbPlayer,
+		Game: &pbblackjack.Game{
+			Id:      "",
+			Players: nil,
+			Dealer: &pbblackjack.Dealer{
+				Hand: &pbblackjack.Hand{
+					Cards: nil,
+				},
+			},
+		},
+	}
+	return &result, nil
+}
+
+func setResponseResult(response *pbblackjack.BlackjackResponse, results ...interface{}) {
+	for _, result := range results {
+		switch v := result.(type) {
+		case *pbblackjack.ViewGamesResult:
+			if v != nil {
+				response.Result = &pbblackjack.BlackjackResponse_ViewGamesResult{ViewGamesResult: v}
+			}
+		case *pbblackjack.JoinGameResult:
+			if v != nil {
+				response.Result = &pbblackjack.BlackjackResponse_JoinGameResult{JoinGameResult: v}
+			}
+		case *pbblackjack.StartGameResult:
+			if v != nil {
+				response.Result = &pbblackjack.BlackjackResponse_StartGameResult{StartGameResult: v}
+			}
+		case *pbblackjack.LeaveGameResult:
+			if v != nil {
+				response.Result = &pbblackjack.BlackjackResponse_LeaveGameResult{LeaveGameResult: v}
+			}
+		case *pbblackjack.ViewCurrentGameResult:
+			if v != nil {
+				response.Result = &pbblackjack.BlackjackResponse_ViewCurrentGameResult{ViewCurrentGameResult: v}
+			}
+		}
+	}
 }
