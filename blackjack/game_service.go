@@ -35,6 +35,10 @@ func (g *gameService) GetGames() []Game {
 }
 
 func (g *gameService) GetGameByID(gameID uuid.UUID) (Game, error) {
+	game, ok := g.games[gameID]
+	if !ok || game == nil {
+		return nil, ErrGameNotFound
+	}
 	return g.games[gameID], nil
 }
 
