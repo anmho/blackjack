@@ -1,10 +1,12 @@
 package blackjack
 
 import (
+	"fmt"
 	"github.com/google/uuid"
 )
 
 type GameService interface {
+	GetGames() []Game
 	// GetGameByID Gets the game by id.
 	GetGameByID(gameID uuid.UUID) (Game, error)
 	// AddGame opens up a new game.
@@ -18,6 +20,18 @@ type gameService struct {
 	games map[uuid.UUID]Game
 	// PlayerID to GameID mappings
 	joinedGames map[uuid.UUID]uuid.UUID
+}
+
+func (g *gameService) GetGames() []Game {
+	games := make([]Game, 0)
+
+	for _, game := range g.games {
+		if game != nil {
+			fmt.Printf("%+v\n", game)
+			games = append(games, game)
+		}
+	}
+	return games
 }
 
 func (g *gameService) GetGameByID(gameID uuid.UUID) (Game, error) {

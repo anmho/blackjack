@@ -5,7 +5,7 @@ import (
 )
 
 func makeTestServer() *server {
-	s, _ := NewService().(*server)
+	s, _ := MakeBlackjackService().(*server)
 	return s
 }
 

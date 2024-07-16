@@ -17,21 +17,14 @@ var _ pbblackjack.BlackJackServiceServer = (*server)(nil)
 
 type server struct {
 	pbblackjack.UnimplementedBlackJackServiceServer
-
-	// joinedGames tracks the games each player is currently joined as. userID -> gameID
-	joinedGames map[string]string
+	gameService GameService
 }
 
-func NewService() pbblackjack.BlackJackServiceServer {
-
-	// initialize 8 games
-	games := make(map[string]Game)
-	for range NumGames {
-		game := NewGame()
-		games[game.ID().String()] = game
+func MakeBlackjackService() pbblackjack.BlackJackServiceServer {
+	gameSvc := NewGameService()
+	s := &server{
+		gameService: gameSvc,
 	}
-
-	s := &server{}
 	return s
 }
 
@@ -93,15 +86,7 @@ func (s *server) Connect(stream pbblackjack.BlackJackService_ConnectServer) erro
 
 // ViewGames displays the games currently available on the blackjack server.
 func (s *server) ViewGames(request *pbblackjack.ViewGamesRequest) (*pbblackjack.ViewGamesResult, error) {
-	var games []*pbblackjack.Game
-	for _, game := range s.games {
-
-		games = append(games, game.ToProto())
-	}
-
-	result := &pbblackjack.ViewGamesResult{
-		Games: games,
-	}
+	result := &pbblackjack.ViewGamesResult{}
 
 	return result, nil
 }
