@@ -9,7 +9,7 @@ import (
 
 func TestGame_IsJoined(t *testing.T) {
 	g := NewGame()
-	p := NewPlayer("joseph")
+	p := NewPlayer()
 
 	err := g.Join(p)
 	require.NoError(t, err)
@@ -25,15 +25,15 @@ func TestGame_IsJoined(t *testing.T) {
 //
 //	g := NewGame()
 //
-//	var players []*Player
+//	var Players []*Player
 //	for i := range g.MaxPlayers() {
-//		players = append(players, NewPlayer(fmt.Sprintf("joey%d", i)))
+//		Players = append(Players, NewPlayer(fmt.Sprintf("joey%d", i)))
 //	}
 //
-//	for i := range players[:10] {
-//		err = g.Join(players[i])
+//	for i := range Players[:10] {
+//		err = g.Join(Players[i])
 //		require.NoError(t, err)
-//		assert.True(t, g.IsJoined(players[i].ID))
+//		assert.True(t, g.IsJoined(Players[i].ID))
 //	}
 //
 //	assert.False(t, g.IsFull())
@@ -58,7 +58,7 @@ func TestGame_Start(t *testing.T) {
 func TestGame_IsFull(t *testing.T) {
 	game := NewGame()
 
-	t.Run("new games is not full (no players)", func(t *testing.T) {
+	t.Run("new games is not full (no Players)", func(t *testing.T) {
 		assert.False(t, game.IsFull())
 	})
 }

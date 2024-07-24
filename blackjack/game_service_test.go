@@ -1,7 +1,6 @@
 package blackjack
 
 import (
-	"fmt"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -24,17 +23,17 @@ func TestNewGameService(t *testing.T) {
 	assert.Len(t, games, 0)
 }
 
-func TestGameService_AddGame(t *testing.T) {
+func TestGameService_CreateGame(t *testing.T) {
 	t.Run("add should add games", func(t *testing.T) {
 		s := NewGameService()
 		assert.Equal(t, 0, len(s.GetGames()))
 		var err error
 		var games []Game
-		err = s.AddGame()
+		g, err := s.CreateGame()
 		require.NoError(t, err)
+		assert.NotNil(t, g)
 		games = s.GetGames()
-		fmt.Println(games)
-		assert.Equal(t, 1, len(games))
+		assert.Len(t, games, 1)
 	})
 }
 

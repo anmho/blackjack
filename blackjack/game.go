@@ -37,12 +37,13 @@ const (
 
 func NewGame() Game {
 	var seats [MaxPlayers]*Player
+	dealer := NewDealer()
 	return &game{
 		GameID: uuid.New(),
 		seats:  seats,
 		Status: pbblackjack.GameStatus_NOT_STARTED,
 		Deck:   NewDeck(),
-		Dealer: NewPlayer("dealer"),
+		Dealer: dealer,
 	}
 }
 
@@ -51,7 +52,7 @@ func (g *game) MakeWager(playerID uuid.UUID, wager int) error {
 	panic("implement me")
 }
 
-// Wagers returns the wagers of all players in the game
+// Wagers returns the wagers of all Players in the game
 func (g *game) Wagers() map[uuid.UUID]int {
 	wagers := map[uuid.UUID]int{}
 
@@ -73,7 +74,7 @@ func (g *game) ID() uuid.UUID {
 	return g.GameID
 }
 
-// Players returns a slice of the players currently joined in the game with no gaps
+// Players returns a slice of the Players currently joined in the game with no gaps
 func (g *game) Players() []*Player {
 	var players []*Player
 	for _, player := range g.seats {
@@ -90,7 +91,8 @@ func (g *game) ToProto() *pbblackjack.Game {
 		playerProto := player.ToPlayerProto()
 		players = append(players, playerProto)
 	}
-	dealer := NewPlayer("dealer")
+	dealer := NewPlayer()
+	dealer.SetDisplayName("dealer")
 
 	return &pbblackjack.Game{
 		Id:      g.GameID.String(),

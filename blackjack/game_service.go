@@ -9,8 +9,8 @@ type GameService interface {
 	GetGames() []Game
 	// GetGameByID Gets the game by id.
 	GetGameByID(gameID uuid.UUID) (Game, error)
-	// AddGame opens up a new game.
-	AddGame() error
+	// CreateGame opens up a new game. Returns a reference to the new game.
+	CreateGame() (Game, error)
 	// GetJoinedGame gets the game a player has joined.
 	GetJoinedGame(playerID uuid.UUID) (Game, error)
 	// LeaveGame leaves the player's currently joined game.
@@ -42,10 +42,16 @@ func (g *gameService) GetGameByID(gameID uuid.UUID) (Game, error) {
 	return g.games[gameID], nil
 }
 
-func (g *gameService) AddGame() error {
+func (g *gameService) CreateGame() (Game, error) {
 	newGame := NewGame()
+
+	// in the rare case the id already exists, lets return an error. client can retry
+	if _, ok := g.games[newGame.ID()]; ok {
+		return nil, ErrGameNotFound
+	}
 	g.games[newGame.ID()] = newGame
-	return nil
+
+	return newGame, nil
 }
 
 func (g *gameService) GetJoinedGame(playerID uuid.UUID) (Game, error) {

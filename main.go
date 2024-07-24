@@ -15,7 +15,11 @@ const (
 )
 
 func main() {
-	blackjackService := blackjack.MakeBlackjackService()
+	gameService := blackjack.NewGameService()
+	playerService := blackjack.NewPlayerService()
+	blackjackService := blackjack.MakeBlackjackService(
+		gameService, playerService,
+	)
 
 	s := grpc.NewServer()
 	pb_blackjack.RegisterBlackJackServiceServer(s, blackjackService)
